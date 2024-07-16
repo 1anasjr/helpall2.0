@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google";
+import HomeLayout from "./components/HomeLayout";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import PostState from "./providers/PostProvider";
+import AuthProvider from "./providers/AuthProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +11,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="max-w-screen-2xl mx-auto bg-[#FAF9F6]">
+        <AuthProvider>
+          <PostState>
+          <HomeLayout>
+              {children}
+          </HomeLayout>
+          </PostState>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
