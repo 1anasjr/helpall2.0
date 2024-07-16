@@ -54,7 +54,7 @@ const EditPost = ({ post }) => {
         thumbnail
       };
 
-      await editPost(currentUser.uid,post.id, updatedPost);
+      await editPost(post.uid,post.id, updatedPost);
 
     } catch (error) {
       console.error('Error updating post:', error);

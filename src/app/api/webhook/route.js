@@ -22,6 +22,7 @@ export const POST= async (req)=>{
         const metadata = await customer.metadata
         const {amount,postId,uid} = metadata
         // console.log(metadata);
+        console.log({postId,uid});
         const post = await getPostById(uid,postId)
         let updatedAmt = parseInt(post.currentDonation) + parseInt(amount);
         const  updatedPost = {...post,currentDonation:updatedAmt}

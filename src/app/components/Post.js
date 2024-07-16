@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import { PostProvider } from '../providers/PostProvider';
 import Link from 'next/link';
 
-const Post = ({post,index,widgetPost}) => {
+const Post = ({post,index}) => {
 
   const { totaldonate,currentDonation, isEmergency, recipientDescription, title, email , userName, profileImg , thumbnail} = post;
   const percentage = currentDonation/totaldonate * 100
@@ -103,6 +103,7 @@ const Post = ({post,index,widgetPost}) => {
                     <div>
 
                     {currentUser.uid === post.uid?
+                    <>
                       <Button id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
@@ -111,7 +112,7 @@ const Post = ({post,index,widgetPost}) => {
                       >
                         <MoreVertIcon className='text-black'/>
                       </Button>
-                      : ""}
+                      
 
                     <Menu
                       id="basic-menu"
@@ -141,6 +142,7 @@ const Post = ({post,index,widgetPost}) => {
                       </MenuItem>
 
                     </Menu>
+                    </>: ""}
                       
                     </div>
                 </div>
@@ -155,7 +157,7 @@ const Post = ({post,index,widgetPost}) => {
                     <span >{percentage.toFixed(0) < 100 ? percentage.toFixed(0) : 100}%</span>
                   </div>
                   <div className='mt-3 flex mx-2'>
-                      <Link className='w-full bg-green-700 rounded-lg text-white px-5 py-2 text-center' href={`/post/${currentUser.uid}/${post.id}`}>Donate</Link>
+                      <Link className='w-full bg-green-700 rounded-lg text-white px-5 py-2 text-center' href={`/post/${post.uid}/${post.id}`}>Donate</Link>
                   </div>
                 </div>
         </div> 
