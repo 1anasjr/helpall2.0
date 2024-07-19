@@ -15,11 +15,14 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { PostProvider } from '../providers/PostProvider';
 import Link from 'next/link';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 const Post = ({post,index}) => {
 
   const { totaldonate,currentDonation, isEmergency, recipientDescription, title, email , userName, profileImg , thumbnail} = post;
   const percentage = currentDonation/totaldonate * 100
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   const { deletePost } = useContext(PostProvider);
   const [openModal, setOpenModal] = useState(false);
@@ -66,7 +69,7 @@ const Post = ({post,index}) => {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: 1000,
+                    width:  isMobile ? '90%' : 1000,
                     bgcolor: 'background.paper',
                     boxShadow: 24,
                     p: 4,

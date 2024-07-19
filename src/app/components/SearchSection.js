@@ -74,28 +74,28 @@ const SearchSection = ({uid}) => {
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('education')} 
-                            className={`p-3 rounded-full ${activeFilters.includes('education') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('education') ? 'bg-blue-200' : 'bg-gray-200'}`}
                         >
                             Education
                         </button>
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('orphanage')} 
-                            className={`p-3 rounded-full ${activeFilters.includes('orphanage') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('orphanage') ? 'bg-blue-200' : 'bg-gray-200'}`}
                         >
                             Orphanage
                         </button>
                         <button 
                             type="button" 
-                            onClick={() => toggleFilter('medical support')} 
-                            className={`p-3 rounded-full ${activeFilters.includes('medical support') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            onClick={() => toggleFilter('medical_support')} 
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('medical_support') ? 'bg-blue-200' : 'bg-gray-200'}`}
                         >
                             Medical Support
                         </button>
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('famine')} 
-                            className={`p-3 rounded-full ${activeFilters.includes('famine') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('famine') ? 'bg-blue-200' : 'bg-gray-200'}`}
                         >
                             Famine
                         </button>

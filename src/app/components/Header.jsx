@@ -11,11 +11,13 @@ import { useRouter } from 'next/navigation'
 import { signOut } from "../../../firebase";
 import AddPost from './AddPost';
 import { useAuth } from '../providers/AuthProvider';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Header = () => {
 
      const router = useRouter();
      const [open, setOpen] = useState(false);
+     const isMobile = useMediaQuery('(max-width:600px)');
      const { currentUser } = useAuth() 
 
      console.log({currentUser});
@@ -36,7 +38,7 @@ const Header = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 1000,
+            width: isMobile ? '90%' : 1000,
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -75,7 +77,7 @@ const Header = () => {
                     </button>
                 </div>
                 
-                <button onClick={signOut} className='flex justify-center items-center cursor-pointer'>
+                <button onClick={signOut} className='hidden md:flex justify-center items-center cursor-pointer'>
                     <span className='mx-3'>{currentUser?.displayName }</span>
                     <Avatar alt={currentUser?.displayName} src={currentUser?.photoURL} sx={{ width: 40, height: 40 }}  />
                 </button>

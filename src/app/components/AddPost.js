@@ -98,17 +98,17 @@ const AddPost = () => {
                 <h3 className='text-xl my-3 font-semibold'>Post Request</h3>
                 <hr className='border-2 mb-3 border-blue-400' />
 
-                <div className="my-2 flex justify-between items-center space-x-3">
-                    <div className='w-1/4'>
-                        <label htmlFor="thumbnail" className='flex my-4 items-center justify-center cursor-pointer bg-[#1212] rounded-lg'>
+                <div className="my-2 flex-col flex md:flex-row justify-between items-center space-x-3">
+                    <div className='w-full md:w-1/4'>
+                        <label htmlFor="thumbnail" className='flex my-4 mx-auto items-center overflow-hidden  justify-center cursor-pointer bg-[#1212] rounded-lg h-[200px] w-[200px]  ' >
                             {thumbnail === '' ? (
                                 <div>
                                     <ImageIcon className='h-[40px] w-[40px] mx-4 my-[100px]' />
                                     <input onChange={(e) => handleThumbnailUpload(e, setThumbnail)} className='border hidden' id='thumbnail' type="file" />
                                 </div>
                             ) : (
-                                <div className='bg-[#1212]'>
-                                    <img src={thumbnail} alt="Thumbnail Preview" className="" />
+                                <div className='bg-[#1212] h-[200px] w-[200px]'>
+                                    <img src={thumbnail} alt="Thumbnail Preview "  className="object-cover" />
                                 </div>
                             )}
                         </label>
@@ -119,7 +119,7 @@ const AddPost = () => {
                         )}
                     </div>
 
-                    <div className='flex flex-col w-3/4 space-y-3'>
+                    <div className='flex flex-col w-full md:w-3/4 space-y-3'>
                         <div>
                             <label htmlFor='title'>Title</label>
                             <div className="flex flex-col">
@@ -134,14 +134,14 @@ const AddPost = () => {
                 </div>
             </div>
 
-            <div className='flex justify-between space-x-2'>
-                <div className='flex flex-col w-1/2 space-y-2 my-4'>
+            <div className='flex flex-col md:flex-row justify-between space-x-2 space-y-2 md:space-y-0'>
+                <div className='flex flex-col w-full md:w-1/2 space-y-2 my-4'>
                     <label htmlFor="emiratesId">Emirates Id</label>
                     <input {...register('emiratesId', { required: true })} className='border rounded p-2' id='emiratesId' type="text" />
                     {errors.emiratesId && <p style={{ color: 'red' }}>Emirates ID is required.</p>}
                 </div>
                 
-                <label htmlFor="document" className='flex w-1/2 cursor-pointer my-4 justify-between items-center bg-[#1212] px-4 rounded-lg'>
+                <label htmlFor="document" className='flex w-full md:w-1/2 cursor-pointer my-4  justify-between items-center bg-[#1212] px-4 py-4 md:py-0 rounded-lg'>
                     <div>
                  <div> Upload Documents {errors.document && <span style={{ color: 'red' }}>Document is required.</span>} </div>
                         <input {...register('document', { required: true })}  onChange={(e) => handleDocumentUpload(e, setDocument)} className='border hidden' id='document' type="file" />
@@ -159,8 +159,8 @@ const AddPost = () => {
                 </label>
             </div>
 
-            <div className='flex justify-between space-x-2'>
-                <div className='flex flex-col w-1/2 space-y-2'>
+            <div className='flex flex-col md:flex-row my-4 md:my-2 justify-between space-x-2 space-y-2 md:space-y-0'>
+                <div className='flex flex-col w-full md:w-1/2 space-y-2'>
                     <label htmlFor="isEmergency">Is Emergency</label>
                     <select {...register('isEmergency', { required: true })} className='border rounded p-2' id='isEmergency'>
                         <option value="0">Not emergency</option>
@@ -169,7 +169,7 @@ const AddPost = () => {
                     {errors.isEmergency && <p style={{ color: 'red' }}>Emergency status is required.</p>}
                 </div>
 
-                <div className='flex flex-col w-1/2 space-y-2'>
+                <div className='flex flex-col w-full md:w-1/2 space-y-2'>
                     <label htmlFor="totaldonate">Donation Amount</label>
                     <input {...register('totaldonate', { required: true })} className='border rounded p-2' id='totaldonate' type="number" />
                     {errors.totaldonate && <p style={{ color: 'red' }}>Donation amount is required.</p>}
@@ -185,7 +185,7 @@ const AddPost = () => {
                         <option value="famine">famine</option>
                     </select>
                     {errors.type && <p style={{ color: 'red' }}>Type status is required.</p>}
-                </div>
+            </div>
 
             <button disabled={isLoading} className='bg-green-700 disabled:bg-green-300 w-full my-6 py-3 px-4 rounded-lg text-white'>
                 {!isLoading ? "Submit" : 'Submitting...'}

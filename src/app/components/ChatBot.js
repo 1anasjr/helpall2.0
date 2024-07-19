@@ -33,7 +33,7 @@ const ChatBotComponent = () => {
       <>
       {isLoaded && (
         <Suspense fallback={<div>Loading...</div>}>
-            <div className="absolute bottom-10 right-10">
+            <div className="hidden md:flex absolute bottom-10 right-10">
                 <ChatBot flow={flow} />
             </div>
         </Suspense>

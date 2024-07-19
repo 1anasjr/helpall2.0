@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import LeftSideBar from './LeftSideBar'
 import RightSidebar from './RightSideBar'
 import ChatBot from './ChatBot'
+import MobileNavbar from './MobileNavbar'
 
 const HomeLayout = ({children}) => {
     const pathname = usePathname()
@@ -17,11 +18,12 @@ const HomeLayout = ({children}) => {
           <ChatBot/>
           <div className='flex justify-between'>
               <LeftSideBar/>
-              <div className='w-[60%] mx-4 mt-5'>
+              <div className='w-full md:w-[60%] mx-4 mt-5'>
               {children}
               </div>
               <RightSidebar/> 
           </div>
+          <MobileNavbar/>
       </div>:
       <div>
               {children}

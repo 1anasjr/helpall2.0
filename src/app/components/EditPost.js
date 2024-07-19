@@ -72,17 +72,19 @@ const EditPost = ({ post }) => {
         <h3 className="text-xl my-3 font-semibold">Update Request</h3>
         <hr className="border-2 mb-3 border-blue-400" />
 
-        <div className="my-2 flex justify-between items-center space-x-3">
+        <div className="my-2 flex-col flex md:flex-row justify-between items-center space-x-3">
 
-          <div className="w-1/4">
-            <label htmlFor="thumbnail" className="flex my-4 items-center justify-center cursor-pointer bg-gray-200 rounded-lg p-4">
+          <div className="w-full md:w-1/4">
+            <label htmlFor="thumbnail" className="flex my-4 mx-auto items-center overflow-hidden  justify-center cursor-pointer bg-[#1212] rounded-lg h-[200px] w-[200px]">
               {thumbnail === '' ? (
                 <>
                   <ImageIcon className="h-10 w-10 mr-2" />
                   <span>Upload Thumbnail</span>
                 </>
               ) : (
-                <img src={thumbnail} alt="Thumbnail Preview" className="h-20 w-auto rounded-lg" />
+                <div className='bg-[#1212] h-[200px] w-[200px]'>
+                    <img src={thumbnail} alt="Thumbnail Preview "  className="object-cover" />
+                 </div>
               )}
               <input onChange={handleThumbnailUpload} className="hidden" id="thumbnail" name="thumbnail" type="file" />
             </label>
@@ -93,7 +95,7 @@ const EditPost = ({ post }) => {
             )}
           </div>
 
-          <div className="flex flex-col w-3/4 space-y-3">
+          <div className="flex flex-col w-full md:w-3/4 space-y-3 mt-2">
             <div>
               <label htmlFor="title">Title</label>
               <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" id="title" className="w-full my-2 border rounded p-2" name="title" required />
@@ -106,14 +108,14 @@ const EditPost = ({ post }) => {
 
       </div>
 
-      <div className="flex justify-between space-x-2">
+      <div className="flex flex-col md:flex-row justify-between space-x-2 space-y-2 md:space-y-0">
 
-        <div className="flex flex-col w-1/2 space-y-2 my-4">
+        <div className="flex flex-col w-full md:w-1/2 space-y-2 my-4">
           <label htmlFor="emiratesId">Emirates Id</label>
           <input onChange={(e) => setEmiratesId(e.target.value)} value={emiratesId} className="border rounded p-2" required id="emiratesId" name="emiratesId" type="text" />
         </div>
 
-        <label htmlFor="document" className="flex w-1/2 cursor-pointer my-4 justify-between items-center bg-gray-200 px-4 rounded-lg">
+        <label htmlFor="document" className="flex w-full md:w-1/2 cursor-pointer my-4  justify-between items-center bg-[#1212] px-4 py-4 md:py-0 rounded-lg">
           <span>Upload Documents</span>
           <input onChange={handleDocumentUpload} className="hidden" id="document" name="document" type="file" />
           <div>
@@ -130,9 +132,9 @@ const EditPost = ({ post }) => {
 
       </div>
 
-      <div className="flex justify-between space-x-2">
+      <div className="flex flex-col md:flex-row my-4 md:my-2 justify-between space-x-2 space-y-2 md:space-y-0">
 
-        <div className="flex flex-col w-1/2 space-y-2">
+        <div className="flex flex-col w-full md:w-1/2 space-y-2">
           <label htmlFor="isEmergency">Emergency Status</label>
           <select onChange={(e) => setIsEmergency(e.target.value)} value={isEmergency} className="border rounded p-2" id="isEmergency" name="isEmergency">
             <option value="0">Not emergency</option>
@@ -140,11 +142,22 @@ const EditPost = ({ post }) => {
           </select>
         </div>
 
-        <div className="flex flex-col w-1/2 space-y-2">
+        <div className="flex flex-col w-full md:w-1/2 space-y-2">
           <label htmlFor="totaldonate">Donation Amount</label>
           <input onChange={(e) => setTotaldonate(e.target.value)} value={totaldonate} className="border rounded p-2" required id="totaldonate" name="totaldonate" type="number" />
         </div>
 
+      </div>
+
+      <div className='flex flex-col w-full space-y-2'>
+                    <label htmlFor="type">Type</label>
+                    <select className='border rounded p-2' id='type'>
+                        <option selected={post.type === 'education'} value="education">Education</option>
+                        <option selected={post.type === 'orphanage'} value="orphanage">Orphanage</option>
+                        <option selected={post.type === 'medical_support'} value="medical_support">Medical Support</option>
+                        <option selected={post.type === 'famine'} value="famine">famine</option>
+                    </select>
+                   
       </div>
 
       <button disabled={isLoading} className="bg-green-700 disabled:bg-green-300 w-full my-6 py-3 px-4 rounded-lg text-white">
