@@ -67,14 +67,14 @@ const Comments = ({uid,postId,userName}) => {
   return (
     <div className='w-full flex flex-col  mx-auto justify-center items-center '>
         <form className='w-[80%] flex flex-col items-center' onSubmit={(e)=>handlerSubmit(e)}>
-            <textarea value={comment} onChange={(e)=>setComment(e.target.value)} placeholder='Enter comments' className='w-full bg-gray-100 px-4 py-2 rounded-2xl mt-[50px]' name="comment_box" id="comment_box" rows={5}></textarea>
+            <textarea value={comment} onChange={(e)=>setComment(e.target.value)} placeholder='Enter comments' className='w-full bg-gray-100 text-black px-4 py-2 rounded-2xl mt-[50px]' name="comment_box" id="comment_box" rows={5}></textarea>
             <button disabled={loading} className='px-4 py-2 mt-5 ml-auto disabled:bg-green-200 bg-green-700 text-white'>Comment</button>
         </form>
         <div className='w-[80%] flex flex-col space-y-2 mt-5 '>
             {comments?.map((comment)=>{
                 if(postId===comment.postId){
                 return (
-                    <span className={`px-4 py-2 w-fit rounded-3xl ${comment.uid === currentUser.uid? "bg-blue-400" : "bg-green-400 ml-auto" }`} >{comment.userName} : {comment.comment}</span>
+                    <span className={`text-black px-4 py-2 w-fit rounded-3xl ${comment.uid === currentUser.uid? "bg-blue-400" : "bg-green-400 ml-auto" }`} >{comment.userName} : {comment.comment}</span>
                 )
             }
             })}

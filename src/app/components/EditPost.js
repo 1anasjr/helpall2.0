@@ -69,17 +69,16 @@ const EditPost = ({ post }) => {
 
       <div className="flex flex-col">
 
-        <h3 className="text-xl my-3 font-semibold">Update Request</h3>
+        <h3 className="text-xl my-3 font-semibold dark:text-white">Update Request</h3>
         <hr className="border-2 mb-3 border-blue-400" />
 
         <div className="my-2 flex-col flex md:flex-row justify-between items-center space-x-3">
 
           <div className="w-full md:w-1/4">
-            <label htmlFor="thumbnail" className="flex my-4 mx-auto items-center overflow-hidden  justify-center cursor-pointer bg-[#1212] rounded-lg h-[200px] w-[200px]">
+            <label htmlFor="thumbnail" className="flex my-4 mx-auto items-center overflow-hidden  justify-center cursor-pointer bg-[#1212] dark:bg-gray-100 rounded-lg h-[200px] w-[200px]">
               {thumbnail === '' ? (
                 <>
-                  <ImageIcon className="h-10 w-10 mr-2" />
-                  <span>Upload Thumbnail</span>
+                  <ImageIcon className="h-[40px] w-[40px] mx-4 my-[100px]" />
                 </>
               ) : (
                 <div className='bg-[#1212] h-[200px] w-[200px]'>
@@ -97,10 +96,10 @@ const EditPost = ({ post }) => {
 
           <div className="flex flex-col w-full md:w-3/4 space-y-3 mt-2">
             <div>
-              <label htmlFor="title">Title</label>
+              <label className='dark:text-white' htmlFor="title">Title</label>
               <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" id="title" className="w-full my-2 border rounded p-2" name="title" required />
             </div>
-            <label htmlFor="description">Description</label>
+            <label className='dark:text-white' htmlFor="description">Description</label>
             <textarea onChange={(e) => setRecipientDescription(e.target.value)} value={recipientDescription} className="border rounded p-2" name="recipientDescription" id="description" rows={8}></textarea>
           </div>
 
@@ -111,15 +110,15 @@ const EditPost = ({ post }) => {
       <div className="flex flex-col md:flex-row justify-between space-x-2 space-y-2 md:space-y-0">
 
         <div className="flex flex-col w-full md:w-1/2 space-y-2 my-4">
-          <label htmlFor="emiratesId">Emirates Id</label>
+          <label className='dark:text-white' htmlFor="emiratesId">Emirates Id</label>
           <input onChange={(e) => setEmiratesId(e.target.value)} value={emiratesId} className="border rounded p-2" required id="emiratesId" name="emiratesId" type="text" />
         </div>
 
-        <label htmlFor="document" className="flex w-full md:w-1/2 cursor-pointer my-4  justify-between items-center bg-[#1212] px-4 py-4 md:py-0 rounded-lg">
-          <span>Upload Documents</span>
+        <label htmlFor="document" className="flex w-full md:w-1/2 cursor-pointer my-4  justify-between items-center bg-[#1212] px-4 py-4  dark:bg-[#252525] md:py-0 rounded-lg">
+          <span  className='dark:text-white'>Upload Documents</span>
           <input onChange={handleDocumentUpload} className="hidden" id="document" name="document" type="file" />
           <div>
-            {document === '' ? <AttachFileIcon /> :
+            {document === '' ? <AttachFileIcon  className='dark:text-white'/> :
               <div className="relative group">
                 <button onClick={(e) => { e.preventDefault(); setDocument(''); }} className="absolute hidden group-hover:flex justify-center items-center w-full h-full group-hover:bg-red-500/50 group-hover:text-white z-20">
                   <CloseIcon />
@@ -135,7 +134,7 @@ const EditPost = ({ post }) => {
       <div className="flex flex-col md:flex-row my-4 md:my-2 justify-between space-x-2 space-y-2 md:space-y-0">
 
         <div className="flex flex-col w-full md:w-1/2 space-y-2">
-          <label htmlFor="isEmergency">Emergency Status</label>
+          <label className='dark:text-white' htmlFor="isEmergency">Emergency Status</label>
           <select onChange={(e) => setIsEmergency(e.target.value)} value={isEmergency} className="border rounded p-2" id="isEmergency" name="isEmergency">
             <option value="0">Not emergency</option>
             <option value="1">Emergency</option>
@@ -143,14 +142,14 @@ const EditPost = ({ post }) => {
         </div>
 
         <div className="flex flex-col w-full md:w-1/2 space-y-2">
-          <label htmlFor="totaldonate">Donation Amount</label>
+          <label className='dark:text-white' htmlFor="totaldonate">Donation Amount</label>
           <input onChange={(e) => setTotaldonate(e.target.value)} value={totaldonate} className="border rounded p-2" required id="totaldonate" name="totaldonate" type="number" />
         </div>
 
       </div>
 
       <div className='flex flex-col w-full space-y-2'>
-                    <label htmlFor="type">Type</label>
+                    <label  className='dark:text-white' htmlFor="type">Type</label>
                     <select className='border rounded p-2' id='type'>
                         <option selected={post.type === 'education'} value="education">Education</option>
                         <option selected={post.type === 'orphanage'} value="orphanage">Orphanage</option>

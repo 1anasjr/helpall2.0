@@ -57,7 +57,7 @@ const SearchSection = ({uid}) => {
 
     return (
         <>
-            <div className='w-full bg-gray-100 flex flex-col items-center p-4'>
+            <div className='w-full bg-gray-100 flex flex-col items-center p-4 dark:text-white dark:bg-[#121212] rounded-3xl shadow-xl'>
                 <div className='bg-white py-2 rounded-full w-full flex justify-between'>
                     <input 
                         className='w-full border-none focus:outline-none focus:ring-0 mx-2 px-3' 
@@ -74,28 +74,28 @@ const SearchSection = ({uid}) => {
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('education')} 
-                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('education') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('education') ? 'bg-blue-200 dark:bg-blue-700' : 'bg-gray-200 dark:bg-[#272727]'}`}
                         >
                             Education
                         </button>
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('orphanage')} 
-                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('orphanage') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('orphanage') ? 'bg-blue-200 dark:bg-blue-700' : 'bg-gray-200 dark:bg-[#272727]'}`}
                         >
                             Orphanage
                         </button>
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('medical_support')} 
-                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('medical_support') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('medical_support') ? 'bg-blue-200 dark:bg-blue-700' : 'bg-gray-200 dark:bg-[#272727]'}`}
                         >
                             Medical Support
                         </button>
                         <button 
                             type="button" 
                             onClick={() => toggleFilter('famine')} 
-                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('famine') ? 'bg-blue-200' : 'bg-gray-200'}`}
+                            className={`p-2 md:p-3 rounded-full ${activeFilters.includes('famine') ? 'bg-blue-200 dark:bg-blue-700' : 'bg-gray-200 dark:bg-[#272727]'}`}
                         >
                             Famine
                         </button>
@@ -103,13 +103,13 @@ const SearchSection = ({uid}) => {
                 </div>
             </div>
             <div className='w-full mt-4'>
-                <h2 className='text-3xl my-3 font-semibold'>Posts</h2>
+                <h2 className='text-3xl my-3 font-semibold dark:text-white'>Posts</h2>
                 <hr className='border-2 mb-3 border-blue-400' />
 
                 {error && <p className='text-red-500'>{error}</p>}
 
                 {filterPost.length > 0 && filterPost.map((post, index) => (
-                    post.isEmergency === 0 && <Post  key={post.id} index={index} post={post} />
+                    <Post  key={post.id} index={index} post={post} iswidget={false}/>
                 ))}
             </div>
         </>

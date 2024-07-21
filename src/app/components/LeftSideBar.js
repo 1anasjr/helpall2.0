@@ -13,7 +13,7 @@ import Link from 'next/link';
 const LeftSideBar = () => {
   const pathname = usePathname()
   return (
-<nav className='sticky top-[100px] left-1 z-10 bg-[#181824] hidden md:flex flex-col w-[20%] h-[530px] my-5 py-5 mx-1 rounded-2xl shadow-lg'>
+<nav className='sticky top-[100px] left-1 z-10 dark:bg-[#121212] bg-[#181824] hidden md:flex flex-col w-[20%] h-[530px] my-5 py-5 mx-1 rounded-2xl shadow-lg'>
             <ul className='h-full p-3 flex flex-col justify-evenly'>
                 <li>
                     <Link href='/' passHref>

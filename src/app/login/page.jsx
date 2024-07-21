@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import { auth, provider, signInWithPopup } from "../../../firebase";
+import { saveUserProfile } from '../../../lib/user/saveUserProfile'
 
 const carouselData = [
   {
@@ -45,6 +46,7 @@ const page = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log(result.user);  // Handle signed-in user info
+      await saveUserProfile(result.user);
     } catch (error) {
       console.error(error);
     }

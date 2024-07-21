@@ -41,7 +41,7 @@ const Slider = () => {
   return (
     <div className='overflow-hidden rounded-2xl'>
       
-          <h2 className='text-3xl my-3 font-semibold'>Campaign</h2>
+          <h2 className='text-3xl my-3 font-semibold dark:text-white'>Campaign</h2>
           <hr className='border-2 mb-3 border-blue-400' />
 
           <div className="embla" ref={emblaRef}>

@@ -2,6 +2,7 @@ import HomeLayout from "./components/HomeLayout";
 import "./globals.css";
 import PostState from "./providers/PostProvider";
 import AuthProvider from "./providers/AuthProvider";
+import ThemeProvider from "./providers/ThemeProvide";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="max-w-screen-2xl mx-auto bg-[#FAF9F6]">
+      <body className="max-w-screen-2xl mx-auto bg-[#FAF9F6] dark:bg-[#1e1e1e]">
+        <ThemeProvider>
         <AuthProvider>
           <PostState>
           <HomeLayout>
@@ -19,6 +21,7 @@ export default function RootLayout({ children }) {
           </HomeLayout>
           </PostState>
         </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

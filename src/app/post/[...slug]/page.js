@@ -18,7 +18,7 @@ const page = async ({params}) => {
   const formateDate = new Date(date);
 
   return (
-    <div className='space-y-5 mb-10'>
+    <div className='space-y-5 mb-10 dark:text-white'>
         <div className='relative flex rounded-2xl overflow-hidden'>
            <Image height={500} width={500} src={thumbnail} className='w-full object-cover h-[250px]' />
            <div className='h-full w-full absolute bg-gradient-to-t from-black to-transparent z-20 '>

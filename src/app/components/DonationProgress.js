@@ -4,10 +4,15 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import AddDonation from './AddDonation';
+import { lightTheme, darkTheme } from '../theme';
+import { ThemeProvider } from '@mui/material/styles';
+import { useTheme } from '../providers/ThemeProvide';
 
 const DonationProgress = ({percentage,currentDonation,totaldonate,title}) => {
 
   const [open, setOpen] = useState(false);
+  const {dark} = useTheme()
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -18,26 +23,28 @@ const DonationProgress = ({percentage,currentDonation,totaldonate,title}) => {
 
   return (
     <>
-        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
-          <Box
-              sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: 900,
-                  bgcolor: 'background.paper',
-                  boxShadow: 24,
-                  p: 4,
-                  overflowY: 'auto', // Use 'auto' instead of 'scroll'
-                  maxHeight: '99vh', // Ensure the modal is not too tall
-              }}
-          >
-              <AddDonation/>
-          </Box>
-        </Modal>
+      <ThemeProvider theme={dark?darkTheme:lightTheme}>
+            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
+              <Box
+                  sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: 900,
+                      bgcolor: 'background.paper',
+                      boxShadow: 24,
+                      p: 4,
+                      overflowY: 'auto', // Use 'auto' instead of 'scroll'
+                      maxHeight: '99vh', // Ensure the modal is not too tall
+                  }}
+              >
+                  <AddDonation/>
+              </Box>
+            </Modal>
+        </ThemeProvider>
 
-         <div className='w-[80%] bg-gray-300 flex flex-col rounded-3xl mx-auto justify-center items-center p-4'>
+         <div className='w-[80%] bg-gray-300 flex flex-col rounded-3xl mx-auto justify-center items-center p-4 dark:bg-[#121212] dark:text-white'>
                 <h4 className='text-xl font-bold mt-4'>Total Donaton</h4>
                 <div className='my-2 text-lg font-semibold'>{`${currentDonation}/${totaldonate}`}</div>
                 <div className='flex justify-center items-center space-x-5 w-full p-5'>

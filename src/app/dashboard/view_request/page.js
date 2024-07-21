@@ -1,6 +1,6 @@
 'use client'
 import { PostProvider } from '@/app/providers/PostProvider'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import InfoIcon from '@mui/icons-material/Info';
 import ClearIcon from '@mui/icons-material/Clear';
 import DoneIcon from '@mui/icons-material/Done';
@@ -10,6 +10,8 @@ import DashboardInfoModal from '@/app/components/DashboardInfoModal';
 import DescriptionIcon from '@mui/icons-material/Description';
 import PendingIcon from '@mui/icons-material/Pending';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useAuth } from '@/app/providers/AuthProvider';
+import getCommunityId from '../../../../lib/comunity/getComunityById';
 
 const Page = () => {
     const { posts , editPost } = useContext(PostProvider);
@@ -18,6 +20,31 @@ const Page = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [anchorEl, setAnchorEl] = useState(null);
     const [postDetails, setPostDetails] = useState(null)
+    const {currentUser} = useAuth();
+    const [communities, setCommunities] = useState([]);
+    const communityIds = communities[0]?.id
+
+
+    useEffect(() => {
+      const fetchCommunities = async () => {
+        try {
+          const communityData = await getCommunityId(currentUser.uid);
+          setCommunities(communityData);
+
+        } catch (error) {
+          console.error('Error fetching communities:', error);
+        }
+      };
+        if(currentUser?.uid){
+        fetchCommunities();
+        }
+    }, [currentUser]);
+
+    // communities.map((u)=>console.log(u))
+    // console.log(communities[0]?.id);/
+
+
+    
 
     const copyToClipboard = (uid) => {
         navigator.clipboard.writeText(uid).then(() => {
@@ -105,8 +132,10 @@ const Page = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {posts && posts.map((post, index) => (
-                                <tr key={index}>
+                        {posts && posts.map((post, index) => (
+                            <>
+                            {console.log(communityIds === post.comunity_id,communityIds,post.comunity_id)}
+                               {communityIds === post.comunity_id && <tr key={index}>
                                     <td className='p-2 text-sm cursor-pointer' onClick={() => copyToClipboard(post.uid)}>
                                         {shortenUid(post.uid)}
                                     </td>
@@ -124,13 +153,14 @@ const Page = () => {
                                     </td> 
                                     <td className='p-2'>
                                         <ul className='flex space-x-2'>
-                                            <li><button onClick={""}><InfoIcon className='h-5 w-5 text-blue-600'/></button></li>
+                                            <li><button><InfoIcon className='h-5 w-5 text-blue-600'/></button></li>
                                             <li><button onClick={()=>{handleStatus(post,-1)}}><ClearIcon className='h-5 w-5 text-red-600'/></button></li>
                                             <li><button onClick={()=>{handleStatus(post,1)}}><DoneIcon className='h-5 w-5 text-green-600'/></button></li>
                                             <li><button onClick={()=>{handleStatus(post,0)}}><PendingIcon className='h-5 w-5 text-yellow-600'/></button></li>
                                         </ul>
                                     </td>
-                                </tr>
+                                </tr>}
+                                </>
                             ))}
                         </tbody>
                     </table>

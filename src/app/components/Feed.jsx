@@ -8,11 +8,11 @@ const Feed = () => {
     console.log(posts);
   return (
     <div>
-      <h2 className='text-3xl my-3 font-semibold'>Feeds</h2>
+      <h2 className='text-3xl my-3 font-semibold dark:text-white'>Feeds</h2>
       <hr className='border-2 mb-3 border-blue-400' />
 
       {posts.length > 0 && posts.map((post, index) => (
-        post.isEmergency === 0 && <Post key={post.id} index={index} post={post} />
+        post.isEmergency === 0 && post.status === 1 && <Post key={post.id} iswidget={false} index={index} post={post} />
       ))}
     </div>
   );
