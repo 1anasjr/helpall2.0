@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 
 
 import Link from 'next/link';
+import { Dashboard } from '@mui/icons-material';
 
 const LeftSideBar = () => {
   const pathname = usePathname()
@@ -52,6 +53,14 @@ const LeftSideBar = () => {
                         <div className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/comunity' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`}>
                             <Diversity3Icon />
                             <span>Comunity</span>
+                        </div>
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/dashboard' passHref>
+                        <div className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/dashboard' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`}>
+                            <Dashboard />
+                            <span>Dashboard</span>
                         </div>
                     </Link>
                 </li>

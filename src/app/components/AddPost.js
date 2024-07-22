@@ -9,9 +9,10 @@ import { PostProvider } from '../providers/PostProvider';
 import { useAuth } from '../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { getAllCommunities } from '../../../lib/comunity/getAllComunities';
+import { Cancel } from '@mui/icons-material';
 
 
-const AddPost = () => {
+const AddPost = ({handleClose}) => {
 
  const { currentUser } = useAuth()
  const {addPost} = useContext(PostProvider)
@@ -36,12 +37,6 @@ const AddPost = () => {
         fetchCommunities();
     }, []);
 
-      const handleOpen = () => {
-        setOpen(true);
-      };
-      const handleClose = () => {
-        setOpen(false);
-      };
 
 
     const handleImageUpload = (event,set) => 
@@ -96,7 +91,10 @@ const AddPost = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className=''>
             <div className='flex flex-col'>
-                <h3 className='text-xl my-3 font-semibold dark:text-white'>Post Request</h3>
+                <div className='flex justify-between items-center'>
+                    <h3 className='text-xl my-3 font-semibold dark:text-white'>Post Request</h3>
+                    <button onClick={handleClose} ><Cancel/></button>
+                </div>
                 <hr className='border-2 mb-3 border-blue-400' />
 
                 <div className="my-2 flex-col flex md:flex-row justify-between items-center space-x-3">

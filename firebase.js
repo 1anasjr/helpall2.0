@@ -1,7 +1,7 @@
 // lib/firebase.js
 
 import { initializeApp } from 'firebase/app';
-import { getAuth ,GoogleAuthProvider , signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth ,GoogleAuthProvider , signInWithPopup, signOut ,createUserWithEmailAndPassword, signInWithEmailAndPassword ,updateProfile} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getDatabase } from 'firebase/database'; 
 import { getStorage, } from 'firebase/storage';
@@ -26,4 +26,4 @@ const database = getDatabase(app);
 const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 
-export { auth, db, database, storage, provider ,signInWithPopup, signOut };
+export { auth, db, database, storage, provider,createUserWithEmailAndPassword, signInWithEmailAndPassword ,signInWithPopup, signOut,updateProfile };

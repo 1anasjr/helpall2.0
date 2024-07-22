@@ -13,7 +13,7 @@ const HomeLayout = ({children}) => {
   return (
     <>
      { 
-      (pathname !== '/login' && !pathname.startsWith('/dashboard') ) ? <div className='w-s'>
+      (pathname !== '/signup' && pathname !== '/login' && !pathname.startsWith('/dashboard') ) ? <div className='w-s'>
           <Header/>
           <ChatBot/>
           <div className='flex justify-between'>

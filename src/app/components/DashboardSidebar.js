@@ -14,9 +14,10 @@ const DashboardSidebar = () => {
                     <Avatar src='' sx={{ width: 140, height: 140 }}/>
                 </div>
                 <div className='flex flex-col space-y-5  my-6 h-full'> 
-                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard"}>Analytic</Link>
-                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard/view_request"}>Requests</Link>
-                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard"}>Profile</Link>
+                    {/* <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard"}>Analytic</Link> */}
+                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '//dashboard/view_request' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard/view_request"}>Requests</Link>
+                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/dashboard/create_comunity' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/dashboard/create_comunity"}>Create Comunity</Link>
+                    <Link className={`flex items-center text-xl rounded-2xl py-4 px-5 space-x-3 ${pathname === '/' ? 'text-black bg-white' : 'text-white hover:text-black hover:bg-white'}`} href={"/"}>To Website</Link>
                  </div>
         </div>
     </div>

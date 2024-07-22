@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Link from 'next/link';
-import { auth, provider, signInWithPopup, signInWithEmailAndPassword } from "../../../firebase";
+import { auth, provider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "../../../firebase";
 import { saveUserProfile } from '../../../lib/user/saveUserProfile';
 
 const carouselData = [
@@ -43,6 +43,7 @@ const Page = () => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 10000 })]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const signInWithGoogle = async () => {
     try {
@@ -61,6 +62,20 @@ const Page = () => {
       const user = userCredential.user;
       console.log(user);  // Handle signed-in user info
       await saveUserProfile(user);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signUpWithEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await updateProfile(user, { displayName: username });
+      console.log(user);  // Handle signed-in user info
+      alert("Sign up successful")
+      await saveUserProfile({ ...user, displayName: username });
     } catch (error) {
       console.error(error);
     }
@@ -92,10 +107,17 @@ const Page = () => {
             <h1 className='text-5xl my-2 font-extrabold text-blue-400'>Help All</h1>
             <p className='text-1xl font-semibold'>Helping All: Together We Make a Difference</p>
           </div>
-
           <div className='w-full my-5'>
-            <h4 className='text-center text-2xl font-semibold'>Login</h4>
-            <form onSubmit={loginWithEmail} className='flex flex-col max-w-md mx-auto'>
+            <h4 className='text-center text-2xl font-semibold'>Sign Up</h4>
+            <form onSubmit={signUpWithEmail} className='flex flex-col max-w-md mx-auto'>
+              <label className='my-1' htmlFor='username'>Username:</label>
+              <input
+                className='border-2 p-1'
+                id='username'
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
               <label className='my-1' htmlFor='email'>Email:</label>
               <input
                 className='border-2 p-1'
@@ -112,21 +134,12 @@ const Page = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="submit" className="mt-3 text-white w-full bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login</button>
+              <button type="submit" className="mt-3 text-white w-full bg-blue-500 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign Up</button>
             </form>
           </div>
 
-          <div className='w-[72%] flex flex-col items-center '>
-            <div className='w-full '>
-              <button onClick={signInWithGoogle} type="button" className="text-white w-full bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  mr-2 mb-2">
-                <svg className="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-                <span className='flex-grow text-center'>Login with Google</span>
-              </button>
-            </div>
-          </div>
-
           <div className='my-4'>
-            <p>Don't have an account? <Link href={'/signup'} className='text-blue-600'>Sign up</Link></p>
+            <p>Already have an account? <Link href={'/login'} className='text-blue-600'>Log in</Link></p>
           </div>
 
         </div>

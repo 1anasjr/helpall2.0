@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import getUser from '../../../lib/user/getUser';
 import { getAllCommunities } from '../../../lib/comunity/getAllComunities';
+import ComunityCard from '../components/ComunityCard';
 
 const page = () => {
   const [comunity, setcomunity] = useState(null);
@@ -38,15 +39,14 @@ const page = () => {
   }
 
   return (
-    <div>
-      <h1>comunity List</h1>
-      <ul>
+    <div className='mb-5'>
+      <h2 className='text-3xl my-3 font-semibold dark:text-white'>Communities</h2>
+      <hr className='border-2 mb-3 border-blue-400' />
+      <div>
         {comunity.map((data) => (
-          <li key={data.id}>
-              name {data.OwnerName}
-          </li>
+          <ComunityCard data={data}/>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

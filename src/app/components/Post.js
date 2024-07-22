@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Image from 'next/image';
@@ -82,7 +83,7 @@ const Post = ({post,index ,iswidget}) => {
                       maxHeight: '99vh', // Ensure the modal is not too tall
                   }}
             >
-              <EditPost post = {post} />
+              <EditPost post = {post} handleClose={handleCloseModal} />
             </Box>
         </Modal>
       </ThemeProvider>
@@ -97,7 +98,7 @@ const Post = ({post,index ,iswidget}) => {
                     </div>
                     <div className='flex'>
 
-                    {currentUser.uid === post.uid?
+                    {currentUser?.uid === post.uid?
                     <>
                    {isEmergency ===1 && <p className='font-medium flex items-center text-red-500 text-center px-2 border border-red-600 rounded-3xl'>urgent</p>}
 

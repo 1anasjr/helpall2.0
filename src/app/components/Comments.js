@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import getComments from '../../../lib/commets/getComments';
 import { useAuth } from '../providers/AuthProvider';
+import { useNotification } from '../providers/NotificationProvider';
 
 const Comments = ({uid,postId,userName}) => {
 
@@ -11,6 +12,7 @@ const Comments = ({uid,postId,userName}) => {
     const [refresh, setRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
     const {currentUser} = useAuth()
+    const { addNotification }= useNotification()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,6 +56,10 @@ const Comments = ({uid,postId,userName}) => {
             }
 
             alert('Post added successfully');
+            // uid, txt, link
+            let txt = `${currentUser.displayName} commented on your post`
+            let link = `/post/${uid}/${postId}`
+            addNotification(uid,txt,link)
             setRefresh(true)
 
             // Optionally reset form fields or handle success state

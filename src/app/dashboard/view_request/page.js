@@ -11,7 +11,8 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import PendingIcon from '@mui/icons-material/Pending';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAuth } from '@/app/providers/AuthProvider';
-import getCommunityId from '../../../../lib/comunity/getComunityById';
+import getCommunityUid from '../../../../lib/comunity/getComunityByUid';
+import { useNotification } from '@/app/providers/NotificationProvider';
 
 const Page = () => {
     const { posts , editPost } = useContext(PostProvider);
@@ -22,13 +23,21 @@ const Page = () => {
     const [postDetails, setPostDetails] = useState(null)
     const {currentUser} = useAuth();
     const [communities, setCommunities] = useState([]);
-    const communityIds = communities[0]?.id
+    const [isDisable, setDisable] = useState(false);
+    let communityIds =  null
+    let communityName = null
+
+    if(communities){
+     communityIds = communities[0]?.id
+     communityName = communities[0]?.comunity_name
+    }
+    const {addNotification} = useNotification()
 
 
     useEffect(() => {
       const fetchCommunities = async () => {
         try {
-          const communityData = await getCommunityId(currentUser.uid);
+          const communityData = await getCommunityUid(currentUser.uid);
           setCommunities(communityData);
 
         } catch (error) {
@@ -85,11 +94,22 @@ const Page = () => {
       }
 
       const handleStatus = async (post,status) =>{
+        setDisable(true)
         const updated_post = {
             ...post,
             status:parseInt(status)
         }
         await editPost(post.uid,post.id,updated_post)
+
+        let txt = `Your request is rejected by ${communityName}`
+
+        if(status===1){
+          txt =`Your request is approved by ${communityName}`
+        }
+
+        const link = `/post/${post.uid}/${post.id}`
+        addNotification(post.uid,txt,link)
+        setDisable(false)
       }
 
     return (
@@ -134,7 +154,7 @@ const Page = () => {
                         <tbody>
                         {posts && posts.map((post, index) => (
                             <>
-                            {console.log(communityIds === post.comunity_id,communityIds,post.comunity_id)}
+                            {/* {console.log(communityIds === post.comunity_id,communityIds,post.comunity_id)} */}
                                {communityIds === post.comunity_id && <tr key={index}>
                                     <td className='p-2 text-sm cursor-pointer' onClick={() => copyToClipboard(post.uid)}>
                                         {shortenUid(post.uid)}
@@ -154,9 +174,9 @@ const Page = () => {
                                     <td className='p-2'>
                                         <ul className='flex space-x-2'>
                                             <li><button><InfoIcon className='h-5 w-5 text-blue-600'/></button></li>
-                                            <li><button onClick={()=>{handleStatus(post,-1)}}><ClearIcon className='h-5 w-5 text-red-600'/></button></li>
-                                            <li><button onClick={()=>{handleStatus(post,1)}}><DoneIcon className='h-5 w-5 text-green-600'/></button></li>
-                                            <li><button onClick={()=>{handleStatus(post,0)}}><PendingIcon className='h-5 w-5 text-yellow-600'/></button></li>
+                                            <li><button disabled={isDisable} onClick={()=>{handleStatus(post,-1)}}><ClearIcon className='h-5 w-5 text-red-600'/></button></li>
+                                            <li><button disabled={isDisable} onClick={()=>{handleStatus(post,1)}}><DoneIcon className='h-5 w-5 text-green-600'/></button></li>
+                                            <li><button disabled={isDisable} onClick={()=>{handleStatus(post,0)}}><PendingIcon className='h-5 w-5 text-yellow-600'/></button></li>
                                         </ul>
                                     </td>
                                 </tr>}

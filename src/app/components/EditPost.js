@@ -5,8 +5,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import CircularProgress from '@mui/material/CircularProgress'; // Updated import
 import { PostProvider } from '../providers/PostProvider';
 import { useAuth } from '../providers/AuthProvider';
+import { Cancel } from '@mui/icons-material';
 
-const EditPost = ({ post }) => {
+const EditPost = ({ post,handleClose }) => {
 
   const [isEmergency, setIsEmergency] = useState(post.isEmergency);
   const [emiratesId, setEmiratesId] = useState(post.emiratesId);
@@ -69,8 +70,10 @@ const EditPost = ({ post }) => {
 
       <div className="flex flex-col">
 
-        <h3 className="text-xl my-3 font-semibold dark:text-white">Update Request</h3>
-        <hr className="border-2 mb-3 border-blue-400" />
+      <div className='flex justify-between items-center'>
+            <h3 className='text-xl my-3 font-semibold dark:text-white'>Update Request</h3>
+            <button type='button' onClick={handleClose} ><Cancel/></button>
+       </div>
 
         <div className="my-2 flex-col flex md:flex-row justify-between items-center space-x-3">
 
