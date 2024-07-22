@@ -31,6 +31,10 @@ export default function AuthProvider({ children }) {
       }
     });
 
+    if(!currentUser){
+      router.push('/');
+    }
+
     return () => unsubscribe();
   }, [router]);
 
